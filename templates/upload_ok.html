@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>跨次元检索demo</title>
+
+<style>
+	.show_image{padding:10px}
+</style>
+
+</head>
+<body>
+	<div style="text-align:center">
+    <h1>跨次元检索demo</h1>
+    <form action="" enctype='multipart/form-data' method='POST'>
+        <input type="file" name="file" style="margin-top:20px;"/>
+		<span> <input type="submit" value="上传" class="button-new" style="margin-top:15px;"/> </span>
+        <br>
+			<img src="{{ url_for('static', filename= input_image_path, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+		<br>
+    </form>
+
+	</div>
+
+	<table style="margin:auto">
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top1, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 1st 视频跳转</p> </a> 
+		</td>
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top2, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 2nd 视频跳转</p> </a> 
+		</td>
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top3, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 3rd 视频跳转</p> </a> 
+		</td>
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top4, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 4th 视频跳转</p> </a> 
+		</td>
+	</table>
+
+	<table style="margin:auto">
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top5, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 5th 视频跳转 </p> </a> 
+		</td>
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top6, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 6th 视频跳转</p> </a> 
+		</td>
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top7, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 7th 视频跳转</p> </a> 
+		</td>
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top8, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 8th 视频跳转</p> </a> 
+		</td>
+	</table>
+
+	<table style="margin:auto">
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top9, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 9th 视频跳转</p> </a> 
+		</td>
+		<td>
+			<img class="show_image" src="{{ url_for('static', filename=top10_paths_dict.top10, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/>
+			<a href="https://www.baidu.com" style="text-align:center"> <p> 10th 视频跳转</p> </a> 
+		</td>
+	</table>
+
+	</div>
+
+	<!-- <img src="{{ url_for('static', filename= path1, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/> -->
+	<!-- <img src="{{ url_for('static', filename= path2, _t=val1) }}" style="max-width:400px; max-height:400px"  alt="图片识别失败"/> -->
+</body>
+</html>
