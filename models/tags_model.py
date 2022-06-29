@@ -13,12 +13,12 @@ from typing import Any, Union
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1' 
 class TagsModel(BaseCVServiceModel):
-    def __init__(self, path_prefix):
+    def __init__(self, path_prefix, device='cuda:0'):
         physical_devices= tf.config.list_physical_devices('GPU')
         self.path_prefix = path_prefix
         for d in physical_devices:
             tf.config.experimental.set_memory_growth(d, True)
-        tf.config.set_visible_devices(physical_devices[0], 'GPU')
+        tf.config.set_visible_devices(physical_devices[int(device[-1])], 'GPU')
         model_path = osp.join(self.path_prefix, "checkpoints/tags/model-resnet_custom_v4.h5")
         self.model = tf.keras.models.load_model(model_path, compile=False)
         self.width = self.model.input_shape[2]

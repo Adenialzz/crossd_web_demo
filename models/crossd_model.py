@@ -14,10 +14,10 @@ import torch
 import numpy as np
 
 class CrossDModel(BaseCVServiceModel):
-    def __init__(self, base_out_dir, lib2d_tags_file, lib2d_feats_file, lib2d_images_dir, tags_thr, tags_k):
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.face_feat_model = AnimeFaceModel(path_prefix=os.getcwd())
-        self.tags_model = TagsModel(path_prefix=os.getcwd())
+    def __init__(self, base_out_dir, lib2d_tags_file, lib2d_feats_file, lib2d_images_dir, tags_thr, tags_k, device):
+        self.device = device
+        self.face_feat_model = AnimeFaceModel(path_prefix=os.getcwd(), device=self.device)
+        self.tags_model = TagsModel(path_prefix=os.getcwd(), device=self.device)
 
         self.base_out_dir = base_out_dir
         self.lib2d_tags_file = lib2d_tags_file

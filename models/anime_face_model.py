@@ -3,8 +3,8 @@ import os
 import os.path as osp
 sys.path.append(os.getcwd())
 from models.base_model import BaseCVServiceModel
-from models.rubick.recognition.preprocess import get_x2_box
-from models.rubick.recognition import get_rec_model
+from models.recognition.preprocess import get_x2_box
+from models.recognition import get_rec_model
 
 import torch
 from mmdet.apis import init_detector, inference_detector
@@ -19,8 +19,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class AnimeFaceModel(BaseCVServiceModel):
-    def __init__(self, path_prefix='/home/song/web_Projects/web_demo/crossd_web_demo/'):
-        self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    def __init__(self, path_prefix='/home/song/web_Projects/web_demo/crossd_web_demo/', device='cuda:0'):
+        self.device = device
         self.path_prefix = path_prefix
         self.init_detector()
         self.init_recognizer()

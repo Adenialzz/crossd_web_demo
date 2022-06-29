@@ -16,7 +16,7 @@ app = Flask(__name__)
 # 静态文件缓存过期时间
 app.send_file_max_age_default = timedelta(seconds=1)
 
-cv_model = CrossDModel( base_out_dir='static/res_query/', lib2d_tags_file='lib2d/lib2d_tags.json', lib2d_feats_file='lib2d/lib2d_feats.json', lib2d_images_dir='lib2d/lib2d_1000_images', tags_thr=0.3, tags_k=5 )
+cv_model = CrossDModel( base_out_dir='static/res_query/', lib2d_tags_file='lib2d/lib2d_tags.json', lib2d_feats_file='lib2d/lib2d_feats.json', lib2d_images_dir='lib2d/lib2d_1000_images', tags_thr=0.3, tags_k=5, device='cuda:0')
 
 # @app.route("/upload", methods=['POST', 'GET'])
 @app.route("/", methods=['POST', 'GET'])
