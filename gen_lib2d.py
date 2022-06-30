@@ -23,12 +23,12 @@ if __name__ == '__main__':
     out_feats_json = 'lib2d_feats.json'
     out_tags_json = 'lib2d_tags.json'
 
-    model = AnimeFaceModel()
+    model = AnimeFaceModel(path_prefix=os.getcwd(), device='cuda:0')
     feats_res = run_model(model, lib2d_images_dir)
     write_json(feats_res, out_feats_json)
     print(f'{out_feats_json}, num of samples: {len(feats_res)}')
 
-    model = TagsModel(os.getcwd())
+    model = TagsModel(path_prefix=os.getcwd(), device='cuda:0')
     tags_res = run_model(model, lib2d_images_dir)
     write_json(tags_res, out_tags_json)
     print(f'{out_tags_json}, num of samples: {len(tags_res)}')
