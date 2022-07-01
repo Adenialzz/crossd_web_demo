@@ -75,7 +75,7 @@ class CrossDModel(BaseCVServiceModel):
         topktags_simis = simis[topk_matched_2d_image_indices]
         print(topktags_simis.shape)
 
-        top10 = np.argsort(topktags_simis)[:: -1][: 10]
+        top10 = np.argsort(topktags_simis)[:: -1][: 50]   # TODO rename
 
         out_dir = osp.join(self.base_out_dir, f"{osp.basename(image_path)}")
         if not osp.isdir(out_dir):

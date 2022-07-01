@@ -38,7 +38,17 @@ def upload():
         f.save(upload_image_path)
         
         # detected_image_path = osp.join("static/images", "output_" + secure_filename(f.filename))
-        top10_image_name = cv_model.run(upload_image_path)
+        top50_image_name = cv_model.run(upload_image_path)
+        avid_set = set()
+        top10_image_name = []
+        for imagename in top50_image_name:
+            avid = video_jumper.imagename2avid(imagename)
+            if avid in avid_set:
+                continue
+            avid_set.add(avid)
+            top10_image_name.append(imagename)
+            if len(top10_image_name) == 10:
+                break
 
         # path = "/images/" + "output_" + secure_filename(f.filename)
         input_image_path = osp.join('images/', secure_filename(f.filename))

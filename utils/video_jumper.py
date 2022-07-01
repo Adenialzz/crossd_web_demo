@@ -3,14 +3,20 @@ import pandas as pd
 
 class VideoJumper:
     def __init__(self, tsv_file):
-        self._imagename2videourl= dict()
+        self._frame_info= dict()
         self.load_info(tsv_file)
 
     def imagename2videourl(self, imageurl):
         if imageurl[-1] == '1':   # handle error like xxxx.jpg.1
              print(imageurl[:-2])
-             return self._imagename2videourl[imageurl[:-2]]
-        return self._imagename2videourl[imageurl]
+             return self._frame_info[imageurl[:-2]]['video_url']
+        return self._frame_info[imageurl]['video_url']
+
+    def imagename2avid(self, imageurl):
+        if imageurl[-1] == '1':   # handle error like xxxx.jpg.1
+             print(imageurl[:-2])
+             return self._frame_info[imageurl[:-2]]['video_url']
+        return self._frame_info[imageurl]['avid']
 
     def load_info(self, tsv_file):
         # cover_url, season_id, avid, cid, fram_seq, fps, material_id
@@ -25,7 +31,10 @@ class VideoJumper:
             bvid = self.avid2bvid(avid)
             pos = self.get_pos(fram_seq, fps)
             video_url = self.get_video_url(bvid, pos)
-            self._imagename2videourl[osp.basename(cover_url)] = video_url
+            self._frame_info[osp.basename(cover_url)] = {
+                    'video_url': video_url,
+                    'avid': avid
+                    }
             # print(cover_url, video_url)
 
     def get_pos(self, fram_seq, fps):
