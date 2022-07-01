@@ -77,7 +77,7 @@ class AnimeFaceModel(BaseCVServiceModel):
         result = inference_detector(self.detector, img)
         det_result = self.thr_filter(result[0].tolist(), thr)
         if len(det_result) == 0:
-            return None
+            det_result = [[ img.shape[1] // 4, img.shape[0] // 4, img.shape[1] * 3 // 4, img.shape[0] * 3 // 4, 0.99 ]] # if no face detected, return center part
         t2 = time.time()   
         if out_file is not None:
             self.detector.show_result(img, result, thr, out_file=out_file)

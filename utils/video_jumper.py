@@ -7,6 +7,9 @@ class VideoJumper:
         self.load_info(tsv_file)
 
     def imagename2videourl(self, imageurl):
+        if imageurl[-1] == '1':   # handle error like xxxx.jpg.1
+             print(imageurl[:-2])
+             return self._imagename2videourl[imageurl[:-2]]
         return self._imagename2videourl[imageurl]
 
     def load_info(self, tsv_file):

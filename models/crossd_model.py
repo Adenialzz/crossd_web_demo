@@ -4,7 +4,7 @@ import shutil
 import os.path as osp
 sys.path.append(os.getcwd())
 from models.base_model import BaseCVServiceModel
-from utils.video_jumper import VideoJumper
+# from utils.video_jumper import VideoJumper
 from utils.utils import read_json
 from utils.tags_retriever import TopKTagsRetriever
 from models.anime_face_model import AnimeFaceModel
@@ -28,17 +28,17 @@ class CrossDModel(BaseCVServiceModel):
 
         self.load_feats_file()
         self.init_tags_retriever()
-        self.video_jumper = VideoJumper(self.tsv_file)
+        # self.video_jumper = VideoJumper(self.tsv_file)
 
     def load_feats_file(self):
         # init self.images_list and self.feats_2d
         json_data_2d = read_json(self.lib2d_feats_file)
         self.images_list = []
-        self.feats_2d = np.zeros((0, 512), dtype=np.float32)
+        feats = []
         for filename, feat in json_data_2d.items():
             self.images_list.append(filename)
-            feat = np.array(feat[0]).reshape(1, 512)
-            self.feats_2d = np.concatenate((self.feats_2d, feat), axis=0)
+            feats.append(feat[0])
+        self.feats_2d = np.array(feats)
 
     def init_tags_retriever(self):
         # init single_tags_retriever
@@ -82,15 +82,19 @@ class CrossDModel(BaseCVServiceModel):
             os.mkdir(out_dir)
         shutil.copyfile(image_path, osp.join(out_dir, f"query_{osp.basename(image_path)}"))
 
-        top10_video_url_dict = dict()
-        for k, idx in enumerate(top10):
-            filename = topktags_images_list[idx]
-            path = osp.join(self.lib2d_images_dir, filename)
-            # info = f"top{k+1}_conf{topktags_simis[idx]:.3f}"
-            # shutil.copyfile(path, osp.join(out_dir, info+osp.basename(path)))
-            shutil.copyfile(path, osp.join(out_dir, f"top{k+1}.jpg"))
-            top10_video_url_dict[f'top{k+1}'] = self.video_jumper.imagename2videourl(filename)
-        return top10_video_url_dict
+        # top10_video_url_dict = dict()
+        print(top10)
+
+        top10_image_name = [topktags_images_list[idx] for idx in top10]
+        # for k, idx in enumerate(top10):
+        #     filename = topktags_images_list[idx]
+        #     path = osp.join(self.lib2d_images_dir, filename)
+        #     # info = f"top{k+1}_conf{topktags_simis[idx]:.3f}"
+        #     # shutil.copyfile(path, osp.join(out_dir, info+osp.basename(path)))
+        #     shutil.copyfile(path, osp.join(out_dir, f"top{k+1}.jpg"))
+        #     top10_video_url_dict[f'top{k+1}'] = self.video_jumper.imagename2videourl(filename)
+        # return top10_video_url_dict
+        return top10_image_name
 
     def post_run(self):
         pass
